@@ -19,3 +19,55 @@ document.querySelector("#app").innerHTML = `
 		</div>
 		<div class="overlay hidden"></div>
 `;
+
+//Seleccionamos los elementos del código
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const btnCloseModal = document.querySelector(".close-modal");
+const btnsOpenModal = document.querySelectorAll(".show-modal");
+
+console.log("btnsOpenModal");
+console.log(btnsOpenModal);
+console.log("btnCloseModal");
+console.log(btnCloseModal);
+console.log("overlay");
+console.log(overlay);
+console.log("modal");
+console.log(modal);
+
+const openModal = function () {
+  modal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+const closeModal = function () {
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+};
+
+//asociamos la funcion openModal a cada uno de los botones
+//for (let i = 0; i < btnsOpenModal.length; i++) {
+//  btnsOpenModal[i].addEventListener("click", openModal);
+//}
+
+//asociamos la funcion openModal a cada uno de los botones usando forEach
+btnsOpenModal.forEach((btn) => btn.addEventListener("click", openModal));
+
+btnCloseModal.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
+//si alguien pulsa la tecla escape que cierre el modal
+//document.addEventListener("keydown", function (e) {
+//if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+//closeModal();
+//}
+//});
+
+//Podemos delante esto porque si noda error porque la llamada a la función se puede que producir luego
+const handleKeyDown = (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
+};
+
+document.addEventListener("keydown", handleKeyDown);
